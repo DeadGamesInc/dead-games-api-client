@@ -1,1 +1,1 @@
-export { default as OblivionHTTPClient } from './http';
+export { default as DeadGamesHTTPClient } from './http';

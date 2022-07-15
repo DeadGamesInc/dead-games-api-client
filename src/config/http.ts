@@ -2,10 +2,10 @@ import { ChainId } from '../model'
 import urlJoin from '../utils/urlJoin'
 
 const endpoints: Record<ChainId, string> = {
-  [ChainId.BSC]: 'https://api.oblivion.art',
-  [ChainId.BSCTestnet]: 'https://api.oblivion.art',
-  [ChainId.Nervos]: 'https://api.oblivion.art',
-  [ChainId.NervosTestnet]: 'https://api.oblivion.art',
+  [ChainId.BSC]: 'http://localhost:5001',
+  [ChainId.BSCTestnet]: 'http://localhost:5001',
+  [ChainId.Nervos]: 'http://localhost:5001',
+  [ChainId.NervosTestnet]: 'http://localhost:5001',
 }
 
 const basePaths: Record<ChainId, string> = {

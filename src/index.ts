@@ -1,9 +1,9 @@
-import { OblivionClientConfig, OblivionHTTPClient } from './client'
-import OblivionAPI from './model/api'
+import { DeadGamesClientConfig, DeadGamesHTTPClient } from './client'
 import { ChainId } from './model/chain'
+import DeadGamesApi from "./model/api";
 
 export * from './model'
 
-const oblivion = (config: OblivionClientConfig = { chainId: ChainId.BSC }): OblivionAPI =>
-  new OblivionHTTPClient(config)
-export default oblivion
+const deadgames = (config: DeadGamesClientConfig = { chainId: ChainId.BSC }): DeadGamesApi =>
+  new DeadGamesHTTPClient(config)
+export default deadgames

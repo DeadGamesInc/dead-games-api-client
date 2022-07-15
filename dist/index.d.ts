@@ -1,5 +1,5 @@
-import { OblivionClientConfig } from './client';
-import OblivionAPI from './model/api';
+import { DeadGamesClientConfig } from './client';
+import DeadGamesApi from "./model/api";
 export * from './model';
-declare const oblivion: (config?: OblivionClientConfig) => OblivionAPI;
-export default oblivion;
+declare const deadgames: (config?: DeadGamesClientConfig) => DeadGamesApi;
+export default deadgames;

@@ -1,7 +1,7 @@
 {
-  "name": "@oblivion-libs/api",
-  "description": "Node client and models for Oblivion API",
-  "repository": "https://github.com/DeadGamesInc/oblivion-api-client.git",
+  "name": "@dead-games-libs/api",
+  "description": "Node client and models for Dead Games API",
+  "repository": "https://github.com/DeadGamesInc/dead-games-api-client.git",
   "version": "0.0.1",
   "private": true,
   "type": "module",

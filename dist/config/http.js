@@ -2,10 +2,10 @@ var _a, _b;
 import { ChainId } from '../model';
 import urlJoin from '../utils/urlJoin';
 var endpoints = (_a = {},
-    _a[ChainId.BSC] = 'https://api.oblivion.art',
-    _a[ChainId.BSCTestnet] = 'https://api.oblivion.art',
-    _a[ChainId.Nervos] = 'https://api.oblivion.art',
-    _a[ChainId.NervosTestnet] = 'https://api.oblivion.art',
+    _a[ChainId.BSC] = 'http://localhost:5001',
+    _a[ChainId.BSCTestnet] = 'http://localhost:5001',
+    _a[ChainId.Nervos] = 'http://localhost:5001',
+    _a[ChainId.NervosTestnet] = 'http://localhost:5001',
     _a);
 var basePaths = (_b = {},
     _b[ChainId.BSC] = 'bsc',

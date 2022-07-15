@@ -1,8 +1,8 @@
-import { OblivionHTTPClient } from './client';
+import { DeadGamesHTTPClient } from './client';
 import { ChainId } from './model/chain';
 export * from './model';
-var oblivion = function (config) {
+var deadgames = function (config) {
     if (config === void 0) { config = { chainId: ChainId.BSC }; }
-    return new OblivionHTTPClient(config);
+    return new DeadGamesHTTPClient(config);
 };
-export default oblivion;
+export default deadgames;

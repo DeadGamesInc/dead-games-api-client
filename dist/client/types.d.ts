@@ -1,5 +1,5 @@
 import { ChainId } from '../model/chain';
-export interface OblivionClientConfig {
+export interface DeadGamesClientConfig {
     chainId: ChainId;
 }
-export declare const DEFAULT_CLIENT_CONFIG: Readonly<OblivionClientConfig>;
+export declare const DEFAULT_CLIENT_CONFIG: Readonly<DeadGamesClientConfig>;

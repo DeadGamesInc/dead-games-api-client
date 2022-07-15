@@ -1,2 +1,2 @@
-export { OblivionClientConfig } from './types';
-export { default as OblivionHTTPClient } from './http';
+export { DeadGamesClientConfig } from './types';
+export { default as DeadGamesHTTPClient } from './http';

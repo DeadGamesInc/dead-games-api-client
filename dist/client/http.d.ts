@@ -1,55 +1,18 @@
-import OblivionAPI from '../model/api';
-import { Listing, Offer, Nft, NftToken, ListingDto } from '../model';
-import Collection from '../model/collection';
-import PaymentToken from '../model/paymentToken';
-import Release from '../model/release';
-import Sale from '../model/sale';
-import { OblivionClientConfig } from './types';
-import VolumeReport from "../model/volumeReport";
-interface OblivionHTTPClientConfig extends OblivionClientConfig {
+import DeadGamesApi from '../model/api';
+import { Nft } from '../model';
+import { DeadGamesClientConfig } from './types';
+import { Wallet } from "../model/wallet";
+interface DeadGamesHTTPClientConfig extends DeadGamesClientConfig {
     endpointOverride?: string;
 }
-export default class OblivionHTTPClient implements OblivionAPI {
+export default class DeadGamesHTTPClient implements DeadGamesApi {
     private readonly http;
-    constructor(config?: OblivionHTTPClientConfig);
+    constructor(config?: DeadGamesHTTPClientConfig);
     private callPluralApi;
-    private callGetListingsApi;
-    getTotalListings(): Promise<number>;
-    getListings(): Promise<ListingDto[]>;
-    getOpenListings(): Promise<ListingDto[]>;
-    getClosedListings(): Promise<ListingDto[]>;
-    getSoldListings(): Promise<ListingDto[]>;
-    getListingsByNft(nftContractAddress: string): Promise<ListingDto[]>;
-    getOpenListingsByNft(nftContractAddress: string): Promise<ListingDto[]>;
-    getListing(version: number, listingId: number): Promise<Listing | undefined>;
-    refreshListing(version: number, listingId: number): Promise<Listing | undefined>;
-    getUserListings(walletAddress: string): Promise<ListingDto[]>;
-    getUserListingsWithOpenOffers(walletAddress: string): Promise<ListingDto[]>;
-    getUserOpenListings(walletAddress: string): Promise<ListingDto[]>;
-    private callGetOffersApi;
-    getOffer(version: number, listingId: number, paymentTokenAddress: string, offerId: number): Promise<Offer | undefined>;
-    refreshOffer(version: number, listingId: number, paymentTokenAddress: string, offerId: number): Promise<Offer | undefined>;
-    getOffers(version: number, listingId: number): Promise<Offer[]>;
-    getUserOffers(address: string): Promise<Offer[]>;
-    getOpenOffers(version: number, listingId: number): Promise<Offer[]>;
-    getTotalOffers(version: number, listingId: number): Promise<number>;
-    getSales(): Promise<Sale[]>;
-    getNft(nftContractAddress: string): Promise<Nft | undefined>;
-    getNfts(): Promise<Nft[]>;
-    getNftsByAddress(addresses: string[]): Promise<Nft[]>;
-    getNftToken(nftContractAddress: string, tokenId: number): Promise<NftToken | undefined>;
-    getNftTokens(nftContractAddress: string, tokenIds: number[]): Promise<NftToken[]>;
-    getTotalCollections(): Promise<number>;
-    getCollections(): Promise<Collection[]>;
-    getUserCollections(address: string): Promise<Collection[]>;
-    getCollection(collectionId: number): Promise<Collection | undefined>;
-    refreshCollection(collectionId: number): Promise<Collection | undefined>;
-    getTotalReleases(): Promise<number>;
-    getReleases(): Promise<Release[]>;
-    getUserReleases(address: string): Promise<Release[]>;
-    getRelease(releaseId: number): Promise<Release | undefined>;
-    refreshRelease(releaseId: number): Promise<Release | undefined>;
-    getPaymentTokens(): Promise<PaymentToken[]>;
-    get24HourVolume(): Promise<VolumeReport>;
+    getNfts: () => Promise<Nft[]>;
+    getNft: (address: string) => Promise<Nft>;
+    getTotalWallets: () => Promise<number>;
+    getWallet: (walletAddress: string) => Promise<Wallet>;
+    getWallets: () => Promise<Wallet[]>;
 }
 export {};
