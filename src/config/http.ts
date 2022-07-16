@@ -2,10 +2,10 @@ import { ChainId } from '../model'
 import urlJoin from '../utils/urlJoin'
 
 const endpoints: Record<ChainId, string> = {
-  [ChainId.BSC]: 'http://localhost:5001',
-  [ChainId.BSCTestnet]: 'http://localhost:5001',
-  [ChainId.Nervos]: 'http://localhost:5001',
-  [ChainId.NervosTestnet]: 'http://localhost:5001',
+  [ChainId.BSC]: 'https://nft-api.deadgames.io',
+  [ChainId.BSCTestnet]: 'https://nft-api.deadgames.io',
+  [ChainId.Nervos]: 'https://nft-api.deadgames.io',
+  [ChainId.NervosTestnet]: 'https://nft-api.deadgames.io',
 }
 
 const basePaths: Record<ChainId, string> = {

@@ -2,10 +2,10 @@ var _a, _b;
 import { ChainId } from '../model';
 import urlJoin from '../utils/urlJoin';
 var endpoints = (_a = {},
-    _a[ChainId.BSC] = 'http://localhost:5001',
-    _a[ChainId.BSCTestnet] = 'http://localhost:5001',
-    _a[ChainId.Nervos] = 'http://localhost:5001',
-    _a[ChainId.NervosTestnet] = 'http://localhost:5001',
+    _a[ChainId.BSC] = 'https://nft-api.deadgames.io',
+    _a[ChainId.BSCTestnet] = 'https://nft-api.deadgames.io',
+    _a[ChainId.Nervos] = 'https://nft-api.deadgames.io',
+    _a[ChainId.NervosTestnet] = 'https://nft-api.deadgames.io',
     _a);
 var basePaths = (_b = {},
     _b[ChainId.BSC] = 'bsc',
