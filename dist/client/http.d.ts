@@ -14,5 +14,6 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
     getTotalWallets: () => Promise<number>;
     getWallet: (walletAddress: string) => Promise<Wallet>;
     getWallets: () => Promise<Wallet[]>;
+    refreshWalletNft: (walletAddress: string, nftAddress: string) => Promise<number[]>;
 }
 export {};

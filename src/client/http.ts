@@ -46,4 +46,11 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
     )
 
   getWallets = (): Promise<Wallet[]> => this.callPluralApi('getWallets')
+
+  refreshWalletNft = (walletAddress: string, nftAddress: string): Promise<number[]> =>
+    this.http.get(
+      join('refreshNftAndGetWalletTokens', walletAddress, nftAddress),
+      getReturnUndefinedOn404Config(),
+    )
 }
+

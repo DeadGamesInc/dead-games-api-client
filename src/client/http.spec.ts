@@ -51,6 +51,11 @@ describe('Wallet APIs', () => {
     const wallet = await client.getWallet(deployer)
     assertValidWallet(wallet)
   })
+
+  it('refreshNftAndGetWalletTokens', async () => {
+    const tokens = await client.refreshWalletNft(deployer, "0xd88931E3406Ec654326153a26dCcE368b324Fe69")
+    expect(tokens.length).toBeGreaterThan(0)
+  })
 })
 
 describe('NFT APIs', () => {

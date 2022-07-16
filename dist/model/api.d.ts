@@ -4,6 +4,7 @@ export interface DeadGamesWalletApi {
     getTotalWallets: () => Promise<number>;
     getWallets: () => Promise<Wallet[]>;
     getWallet: (walletAddress: string) => Promise<Wallet>;
+    refreshWalletNft: (walletAddress: string, nftAddress: string) => Promise<number[]>;
 }
 export interface DeadGamesNftApi {
     getNfts: () => Promise<Nft[]>;
