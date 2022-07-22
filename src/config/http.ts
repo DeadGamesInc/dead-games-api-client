@@ -7,6 +7,7 @@ const endpoints: Record<ChainId, string> = {
   [ChainId.Nervos]: 'https://nft-api.deadgames.io',
   [ChainId.NervosTestnet]: 'https://nft-api.deadgames.io',
   [ChainId.MaticTestnet]: 'https://nft-api.deadgames.io',
+  [ChainId.Matic]: 'https://nft-api.deadgames.io',
 }
 
 const basePaths: Record<ChainId, string> = {
@@ -15,6 +16,7 @@ const basePaths: Record<ChainId, string> = {
   [ChainId.Nervos]: 'nervos',
   [ChainId.NervosTestnet]: 'nervos_testnet',
   [ChainId.MaticTestnet]: 'matic_testnet',
+  [ChainId.Matic]: 'matic',
 }
 
 export const getApiEndpoint = (chainId: ChainId): string => endpoints[chainId]
