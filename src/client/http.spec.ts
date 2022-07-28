@@ -69,3 +69,19 @@ describe('NFT APIs', () => {
     nfts.forEach((nft) => assertValidNft(nft))
   })
 })
+
+describe('Wert API', () => {
+  it('requestSignature ', async () => {
+    const signedData = await client.requestSignature({
+      address: "account",
+      commodity: "MATIC",
+      commodity_amount: 10,
+      pk_id: "config.pk_id",
+      sc_address: "scAddress",
+      sc_input_data: "scInputData",
+    })
+    console.log(signedData)
+    expect(signedData).toMatchSchema(schemaProvider.getSchemaForSymbol('SignatureResponse'))
+
+  });
+})
