@@ -6,7 +6,6 @@ export interface SignableData {
     pk_id: string;
     sc_address: string;
     sc_input_data: string;
-    signature: string;
 }
 export interface SignatureResponse {
     signedData: SignableData;
