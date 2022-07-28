@@ -57,6 +57,5 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
     )
 
   requestSignature = (unsignedData: SignableData): Promise<SignatureResponse> => this.httpWert.post('requestSignature', unsignedData)
-
 }
 
