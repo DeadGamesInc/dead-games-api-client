@@ -1,9 +1,10 @@
-import { getApiBaseUrl } from '../config/http'
+import { getApiBaseUrl, wertPartnerApiEndpoint } from '../config/http'
 import DeadGamesApi from '../model/api'
 import { Nft } from '../model'
 import { HTTPAPICaller, getReturnUndefinedOn404Config } from '../utils/http'
 import { DEFAULT_CLIENT_CONFIG, DeadGamesClientConfig } from './types'
 import { Wallet } from "../model/wallet";
+import { SignableData, SignatureResponse } from "../model/wert";
 
 interface DeadGamesHTTPClientConfig extends DeadGamesClientConfig {
   endpointOverride?: string
@@ -13,11 +14,13 @@ const join = (path: string, ...segments: any[]) => [path, ...segments].join('/')
 
 export default class DeadGamesHTTPClient implements DeadGamesApi {
   private readonly http: HTTPAPICaller
+  private readonly httpWert: HTTPAPICaller
 
   constructor(config: DeadGamesHTTPClientConfig = DEFAULT_CLIENT_CONFIG) {
     const { chainId, endpointOverride } = config
 
     this.http = new HTTPAPICaller(getApiBaseUrl(chainId, endpointOverride))
+    this.httpWert = new HTTPAPICaller(wertPartnerApiEndpoint)
   }
 
   private callPluralApi = async <R, T>(api: string, resultMapper?: (raw: R) => T): Promise<T[]> => {
@@ -52,5 +55,8 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
       join('refreshNftAndGetWalletTokens', walletAddress, nftAddress),
       getReturnUndefinedOn404Config(),
     )
+
+  requestSignature = (unsignedData: SignableData): Promise<SignatureResponse> => this.httpWert.post('requestSignature', unsignedData)
+
 }
 

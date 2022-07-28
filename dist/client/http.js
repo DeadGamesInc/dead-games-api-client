@@ -82,6 +82,7 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         this.refreshWalletNft = function (walletAddress, nftAddress) {
             return _this.http.get(join('refreshNftAndGetWalletTokens', walletAddress, nftAddress), getReturnUndefinedOn404Config());
         };
+        this.requestSignature = function (unsignedData) { return _this.http.post('requestSignature', unsignedData); };
         var chainId = config.chainId, endpointOverride = config.endpointOverride;
         this.http = new HTTPAPICaller(getApiBaseUrl(chainId, endpointOverride));
     }

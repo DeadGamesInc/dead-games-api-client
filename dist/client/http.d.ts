@@ -2,6 +2,7 @@ import DeadGamesApi from '../model/api';
 import { Nft } from '../model';
 import { DeadGamesClientConfig } from './types';
 import { Wallet } from "../model/wallet";
+import { SignableData, SignatureResponse } from "../model/wert";
 interface DeadGamesHTTPClientConfig extends DeadGamesClientConfig {
     endpointOverride?: string;
 }
@@ -15,5 +16,6 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
     getWallet: (walletAddress: string) => Promise<Wallet>;
     getWallets: () => Promise<Wallet[]>;
     refreshWalletNft: (walletAddress: string, nftAddress: string) => Promise<number[]>;
+    requestSignature: (unsignedData: SignableData) => Promise<SignatureResponse>;
 }
 export {};

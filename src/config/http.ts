@@ -1,6 +1,7 @@
 import { ChainId } from '../model'
 import urlJoin from '../utils/urlJoin'
 
+
 const endpoints: Record<ChainId, string> = {
   [ChainId.BSC]: 'https://nft-api.deadgames.io',
   [ChainId.BSCTestnet]: 'https://nft-api.deadgames.io',
@@ -18,6 +19,8 @@ const basePaths: Record<ChainId, string> = {
   [ChainId.MaticTestnet]: 'matic_testnet',
   [ChainId.Matic]: 'matic',
 }
+
+export const wertPartnerApiEndpoint = 'https://wert-api.deadgames.io'
 
 export const getApiEndpoint = (chainId: ChainId): string => endpoints[chainId]
 export const getApiBasePath = (chainId: ChainId): string => basePaths[chainId]

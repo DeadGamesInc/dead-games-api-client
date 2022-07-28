@@ -1,5 +1,6 @@
 import { Nft } from './nft'
 import { Wallet } from "./wallet";
+import { SignatureResponse, SignableData } from "./wert";
 
 export interface DeadGamesWalletApi {
   getTotalWallets: () => Promise<number>
@@ -13,7 +14,12 @@ export interface DeadGamesNftApi {
   getNft: (address: string) => Promise<Nft>
 }
 
+export interface WertPartnerApi {
+  requestSignature: (unsignedData: SignableData) => Promise<SignatureResponse>
+}
+
 export default interface DeadGamesApi
   extends DeadGamesWalletApi,
-    DeadGamesNftApi
+    DeadGamesNftApi,
+    WertPartnerApi
     {}
