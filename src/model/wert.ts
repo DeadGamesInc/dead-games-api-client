@@ -6,7 +6,6 @@ export interface SignableData {
   commodity_amount: number
   pk_id: string
   sc_address: string
-  sc_id: string
   sc_input_data: string
   signature: string
 }

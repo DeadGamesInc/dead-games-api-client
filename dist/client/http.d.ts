@@ -8,6 +8,7 @@ interface DeadGamesHTTPClientConfig extends DeadGamesClientConfig {
 }
 export default class DeadGamesHTTPClient implements DeadGamesApi {
     private readonly http;
+    private readonly httpWert;
     constructor(config?: DeadGamesHTTPClientConfig);
     private callPluralApi;
     getNfts: () => Promise<Nft[]>;

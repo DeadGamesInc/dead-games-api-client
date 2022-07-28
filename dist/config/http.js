@@ -17,6 +17,7 @@ var basePaths = (_b = {},
     _b[ChainId.MaticTestnet] = 'matic_testnet',
     _b[ChainId.Matic] = 'matic',
     _b);
+export var wertPartnerApiEndpoint = 'https://wert-api.deadgames.io';
 export var getApiEndpoint = function (chainId) { return endpoints[chainId]; };
 export var getApiBasePath = function (chainId) { return basePaths[chainId]; };
 export var getApiBaseUrl = function (chainId, endpoint) {

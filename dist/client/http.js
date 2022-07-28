@@ -43,7 +43,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-import { getApiBaseUrl } from '../config/http';
+import { getApiBaseUrl, wertPartnerApiEndpoint } from '../config/http';
 import { HTTPAPICaller, getReturnUndefinedOn404Config } from '../utils/http';
 import { DEFAULT_CLIENT_CONFIG } from './types';
 var join = function (path) {
@@ -82,9 +82,10 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         this.refreshWalletNft = function (walletAddress, nftAddress) {
             return _this.http.get(join('refreshNftAndGetWalletTokens', walletAddress, nftAddress), getReturnUndefinedOn404Config());
         };
-        this.requestSignature = function (unsignedData) { return _this.http.post('requestSignature', unsignedData); };
+        this.requestSignature = function (unsignedData) { return _this.httpWert.post('requestSignature', unsignedData); };
         var chainId = config.chainId, endpointOverride = config.endpointOverride;
         this.http = new HTTPAPICaller(getApiBaseUrl(chainId, endpointOverride));
+        this.httpWert = new HTTPAPICaller(wertPartnerApiEndpoint);
     }
     return DeadGamesHTTPClient;
 }());
