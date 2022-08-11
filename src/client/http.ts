@@ -1,9 +1,10 @@
-import { getApiBaseUrl, wertPartnerApiEndpoint } from '../config/http'
+import { getApiBaseUrl as nftApiBaseUrl } from '../config/nftApiHttp'
+import { getApiBaseUrl as wertApiBaseUrl } from '../config/wertApiHttp'
 import DeadGamesApi from '../model/api'
-import { Nft } from '../model'
+import { Nft, NftDTO } from '../model'
 import { HTTPAPICaller, getReturnUndefinedOn404Config } from '../utils/http'
 import { DEFAULT_CLIENT_CONFIG, DeadGamesClientConfig } from './types'
-import { Wallet } from "../model/wallet";
+import { Wallet, WalletDTO } from "../model/wallet";
 import { SignableData, SignatureResponse } from "../model/wert";
 
 interface DeadGamesHTTPClientConfig extends DeadGamesClientConfig {
@@ -19,8 +20,8 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
   constructor(config: DeadGamesHTTPClientConfig = DEFAULT_CLIENT_CONFIG) {
     const { chainId, endpointOverride } = config
 
-    this.http = new HTTPAPICaller(getApiBaseUrl(chainId, endpointOverride))
-    this.httpWert = new HTTPAPICaller(wertPartnerApiEndpoint)
+    this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, endpointOverride))
+    this.httpWert = new HTTPAPICaller(wertApiBaseUrl(chainId, endpointOverride))
   }
 
   private callPluralApi = async <R, T>(api: string, resultMapper?: (raw: R) => T): Promise<T[]> => {
@@ -30,7 +31,7 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
 
   getNfts = (): Promise<Nft[]> => this.callPluralApi('getNfts')
 
-  getNft = (address: string): Promise<Nft> =>
+  getNft = (address: string): Promise<NftDTO> =>
     this.http.get(
       join('getNft', address),
       getReturnUndefinedOn404Config()
@@ -42,7 +43,7 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
       getReturnUndefinedOn404Config()
     )
 
-  getWallet = (walletAddress: string): Promise<Wallet> =>
+  getWallet = (walletAddress: string): Promise<WalletDTO> =>
     this.http.get(
       join('getWallet', walletAddress),
       getReturnUndefinedOn404Config(),

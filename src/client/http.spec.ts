@@ -3,8 +3,8 @@ import { matchersWithOptions } from 'jest-json-schema'
 import * as TJS from 'typescript-json-schema'
 
 import DeadGamesHTTPClient from './http'
-import { ChainId, Nft } from '../model'
-import { Wallet } from "../model/wallet";
+import { ChainId, Nft, NftDTO } from '../model'
+import { Wallet, WalletDTO } from "../model/wallet";
 import { Address } from "../model/common";
 
 expect.extend(
@@ -24,17 +24,26 @@ if(!schemaProvider) {
 }
 
 const client = new DeadGamesHTTPClient({ chainId: ChainId.BSC })
+const wertClient = new DeadGamesHTTPClient({ chainId: ChainId.MaticTestnet })
 const deployer: Address = "0xB8C1FFF8b915232067c1e7449870e397E43B143b"
 
 const assertValidWallet = (wallet: Wallet) =>
   expect(wallet).toMatchSchema(schemaProvider.getSchemaForSymbol('Wallet'))
+
+const assertValidWalletDTO = (wallet: WalletDTO) =>
+  expect(wallet).toMatchSchema(schemaProvider.getSchemaForSymbol('WalletDTO'))
+
 const assertValidWallets = (wallets: Wallet[]) => {
   expect(wallets).not.toBeUndefined()
   expect(wallets.length).toBeGreaterThan(0)
-  wallets.forEach((listing) => assertValidWallet(listing))
+  wallets.forEach((wallet) => assertValidWallet(wallet))
 }
+
 const assertValidNft = (nft: Nft) =>
   expect(nft).toMatchSchema(schemaProvider.getSchemaForSymbol('Nft'))
+
+const assertValidNftDTO = (nft: NftDTO) =>
+  expect(nft).toMatchSchema(schemaProvider.getSchemaForSymbol('NftDTO'))
 
 describe('Wallet APIs', () => {
   it('getTotalWallets', async () => {
@@ -42,14 +51,14 @@ describe('Wallet APIs', () => {
     expect(totalWallets).toBeGreaterThan(0)
   })
 
-  it('getWallets', async () => {
-    const wallets = await client.getWallets()
-    assertValidWallets(wallets)
-  })
+  // it('getWallets', async () => {
+  //   const wallets = await client.getWallets()
+  //   assertValidWallets(wallets)
+  // })
 
   it('getWallet', async () => {
     const wallet = await client.getWallet(deployer)
-    assertValidWallet(wallet)
+    assertValidWalletDTO(wallet)
   })
 
   it('refreshNftAndGetWalletTokens', async () => {
@@ -61,18 +70,18 @@ describe('Wallet APIs', () => {
 describe('NFT APIs', () => {
   it('getNft', async () => {
     const nft = await client.getNft('0x6209E17d98ba2089571476940751802AAc4249e8')
-    assertValidNft(nft)
+    assertValidNftDTO(nft)
   })
 
-  it('getNfts', async () => {
-    const nfts = await client.getNfts()
-    nfts.forEach((nft) => assertValidNft(nft))
-  })
+  // it('getNfts', async () => {
+  //   const nfts = await client.getNfts()
+  //   nfts.forEach((nft) => assertValidNft(nft))
+  // })
 })
 
 describe('Wert API', () => {
   it('requestSignature ', async () => {
-    const signedData = await client.requestSignature({
+    const signedData = await wertClient.requestSignature({
       address: "account",
       commodity: "MATIC",
       commodity_amount: 10,
@@ -80,8 +89,7 @@ describe('Wert API', () => {
       sc_address: "scAddress",
       sc_input_data: "scInputData",
     })
-    console.log(signedData)
-    expect(signedData).toMatchSchema(schemaProvider.getSchemaForSymbol('SignatureResponse'))
 
+    expect(signedData).toMatchSchema(schemaProvider.getSchemaForSymbol('SignatureResponse'))
   });
 })

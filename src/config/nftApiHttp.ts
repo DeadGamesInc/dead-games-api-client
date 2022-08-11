@@ -20,7 +20,6 @@ const basePaths: Record<ChainId, string> = {
   [ChainId.Matic]: 'matic',
 }
 
-export const wertPartnerApiEndpoint = 'https://wert-api.deadgames.io'
 
 export const getApiEndpoint = (chainId: ChainId): string => endpoints[chainId]
 export const getApiBasePath = (chainId: ChainId): string => basePaths[chainId]

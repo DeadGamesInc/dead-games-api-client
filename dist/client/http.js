@@ -43,7 +43,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-import { getApiBaseUrl, wertPartnerApiEndpoint } from '../config/http';
+import { getApiBaseUrl as nftApiBaseUrl } from '../config/nftApiHttp';
+import { getApiBaseUrl as wertApiBaseUrl } from '../config/wertApiHttp';
 import { HTTPAPICaller, getReturnUndefinedOn404Config } from '../utils/http';
 import { DEFAULT_CLIENT_CONFIG } from './types';
 var join = function (path) {
@@ -84,8 +85,8 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         };
         this.requestSignature = function (unsignedData) { return _this.httpWert.post('requestSignature', unsignedData); };
         var chainId = config.chainId, endpointOverride = config.endpointOverride;
-        this.http = new HTTPAPICaller(getApiBaseUrl(chainId, endpointOverride));
-        this.httpWert = new HTTPAPICaller(wertPartnerApiEndpoint);
+        this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, endpointOverride));
+        this.httpWert = new HTTPAPICaller(wertApiBaseUrl(chainId, endpointOverride));
     }
     return DeadGamesHTTPClient;
 }());
