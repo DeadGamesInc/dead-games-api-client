@@ -1,4 +1,4 @@
 export interface ImageCacheDetails {
-  highResImage: string
-  lowResImage: string
+  highResImage: string | null
+  lowResImage: string | null
 }

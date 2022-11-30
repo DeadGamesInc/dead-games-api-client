@@ -1,22 +1,24 @@
 import DeadGamesApi from '../model/api';
-import { Nft, NftDTO } from '../model';
+import { Nft, Nft1155DTO, NftDTO, NftPreviewDTO } from '../model';
 import { DeadGamesClientConfig } from './types';
 import { Wallet, WalletDTO } from "../model/wallet";
 import { SignableData, SignatureResponse } from "../model/wert";
-interface DeadGamesHTTPClientConfig extends DeadGamesClientConfig {
-    endpointOverride?: string;
-}
 export default class DeadGamesHTTPClient implements DeadGamesApi {
     private readonly http;
     private readonly httpWert;
-    constructor(config?: DeadGamesHTTPClientConfig);
+    constructor(config?: DeadGamesClientConfig);
     private callPluralApi;
     getNfts: () => Promise<Nft[]>;
     getNft: (address: string) => Promise<NftDTO>;
     getTotalWallets: () => Promise<number>;
     getWallet: (walletAddress: string) => Promise<WalletDTO>;
+    getNftPreviews: () => Promise<NftPreviewDTO[]>;
+    getNftPreviewsByAddress(addresses: string[]): Promise<NftPreviewDTO[]>;
+    getOwnedNftPreviews: (owner: string) => Promise<NftPreviewDTO[]>;
+    getNfts1155: () => Promise<Nft1155DTO[]>;
+    getOwnedNfts1155: (owner: string) => Promise<Nft1155DTO[]>;
+    getWalletNftPreviews: (walletAddress: string) => Promise<NftPreviewDTO[]>;
     getWallets: () => Promise<Wallet[]>;
     refreshWalletNft: (walletAddress: string, nftAddress: string) => Promise<number[]>;
     requestSignature: (unsignedData: SignableData) => Promise<SignatureResponse>;
 }
-export {};

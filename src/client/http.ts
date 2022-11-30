@@ -1,26 +1,29 @@
 import { getApiBaseUrl as nftApiBaseUrl } from '../config/nftApiHttp'
 import { getApiBaseUrl as wertApiBaseUrl } from '../config/wertApiHttp'
 import DeadGamesApi from '../model/api'
-import { Nft, NftDTO } from '../model'
+import { Nft, Nft1155DTO, NftDTO, NftPreviewDTO, RawNftPreviewDTO } from '../model'
 import { HTTPAPICaller, getReturnUndefinedOn404Config } from '../utils/http'
 import { DEFAULT_CLIENT_CONFIG, DeadGamesClientConfig } from './types'
 import { Wallet, WalletDTO } from "../model/wallet";
 import { SignableData, SignatureResponse } from "../model/wert";
 
-interface DeadGamesHTTPClientConfig extends DeadGamesClientConfig {
-  endpointOverride?: string
-}
 
 const join = (path: string, ...segments: any[]) => [path, ...segments].join('/')
 
+const toNftPreview = (rawNftPreviewDto: RawNftPreviewDTO): NftPreviewDTO => {
+  const { nftTokens, ...nftPreviewDto } = rawNftPreviewDto
+  return nftPreviewDto
+}
+
 export default class DeadGamesHTTPClient implements DeadGamesApi {
   private readonly http: HTTPAPICaller
+
   private readonly httpWert: HTTPAPICaller
 
-  constructor(config: DeadGamesHTTPClientConfig = DEFAULT_CLIENT_CONFIG) {
+  constructor(config: DeadGamesClientConfig = DEFAULT_CLIENT_CONFIG) {
     const { chainId, endpointOverride } = config
 
-    this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, endpointOverride))
+    this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, 'http://localhost:5001'))
     this.httpWert = new HTTPAPICaller(wertApiBaseUrl(chainId, endpointOverride))
   }
 
@@ -48,6 +51,26 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
       join('getWallet', walletAddress),
       getReturnUndefinedOn404Config(),
     )
+
+  getNftPreviews = (): Promise<NftPreviewDTO[]> =>
+    this.callPluralApi(join('getNftPreviews'), toNftPreview)
+
+  async getNftPreviewsByAddress(addresses: string[]): Promise<NftPreviewDTO[]> {
+    const nfts: RawNftPreviewDTO[] = await this.http.post('getNftPreviewsByAddress', addresses, getReturnUndefinedOn404Config())
+    return nfts.map(toNftPreview)
+  }
+
+  getOwnedNftPreviews = (owner: string): Promise<NftPreviewDTO[]> =>
+    this.callPluralApi(join('getOwnedNftPreviews', owner), toNftPreview)
+
+  getNfts1155 = (): Promise<Nft1155DTO[]> =>
+    this.callPluralApi(join('getNfts1155'))
+
+  getOwnedNfts1155 = (owner: string): Promise<Nft1155DTO[]> =>
+    this.callPluralApi(join('getOwnedNfts1155', owner))
+
+  getWalletNftPreviews = (walletAddress: string): Promise<NftPreviewDTO[]> =>
+    this.callPluralApi(join('getWalletNftPreviews', walletAddress), toNftPreview)
 
   getWallets = (): Promise<Wallet[]> => this.callPluralApi('getWallets')
 

@@ -34,6 +34,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -53,6 +64,10 @@ var join = function (path) {
         segments[_i - 1] = arguments[_i];
     }
     return __spreadArray([path], segments, true).join('/');
+};
+var toNftPreview = function (rawNftPreviewDto) {
+    var nftTokens = rawNftPreviewDto.nftTokens, nftPreviewDto = __rest(rawNftPreviewDto, ["nftTokens"]);
+    return nftPreviewDto;
 };
 var DeadGamesHTTPClient = /** @class */ (function () {
     function DeadGamesHTTPClient(config) {
@@ -79,15 +94,43 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         this.getWallet = function (walletAddress) {
             return _this.http.get(join('getWallet', walletAddress), getReturnUndefinedOn404Config());
         };
+        this.getNftPreviews = function () {
+            return _this.callPluralApi(join('getNftPreviews'), toNftPreview);
+        };
+        this.getOwnedNftPreviews = function (owner) {
+            return _this.callPluralApi(join('getOwnedNftPreviews', owner), toNftPreview);
+        };
+        this.getNfts1155 = function () {
+            return _this.callPluralApi(join('getNfts1155'));
+        };
+        this.getOwnedNfts1155 = function (owner) {
+            return _this.callPluralApi(join('getOwnedNfts1155', owner));
+        };
+        this.getWalletNftPreviews = function (walletAddress) {
+            return _this.callPluralApi(join('getWalletNftPreviews', walletAddress), toNftPreview);
+        };
         this.getWallets = function () { return _this.callPluralApi('getWallets'); };
         this.refreshWalletNft = function (walletAddress, nftAddress) {
             return _this.http.get(join('refreshNftAndGetWalletTokens', walletAddress, nftAddress), getReturnUndefinedOn404Config());
         };
         this.requestSignature = function (unsignedData) { return _this.httpWert.post('requestSignature', unsignedData); };
         var chainId = config.chainId, endpointOverride = config.endpointOverride;
-        this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, endpointOverride));
+        this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, 'http://localhost:5001'));
         this.httpWert = new HTTPAPICaller(wertApiBaseUrl(chainId, endpointOverride));
     }
+    DeadGamesHTTPClient.prototype.getNftPreviewsByAddress = function (addresses) {
+        return __awaiter(this, void 0, void 0, function () {
+            var nfts;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.http.post('getNftPreviewsByAddress', addresses, getReturnUndefinedOn404Config())];
+                    case 1:
+                        nfts = _a.sent();
+                        return [2 /*return*/, nfts.map(toNftPreview)];
+                }
+            });
+        });
+    };
     return DeadGamesHTTPClient;
 }());
 export default DeadGamesHTTPClient;

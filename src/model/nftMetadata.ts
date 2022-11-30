@@ -6,7 +6,7 @@ export interface NftMetadataTrait {
 export interface NftMetadata {
   name: string
   description: string
-  externalUrl: string
+  externalUrl: string | null
   image: string
   attributes: NftMetadataTrait[]
 }
