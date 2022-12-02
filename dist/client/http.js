@@ -115,7 +115,7 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         };
         this.requestSignature = function (unsignedData) { return _this.httpWert.post('requestSignature', unsignedData); };
         var chainId = config.chainId, endpointOverride = config.endpointOverride;
-        this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, 'http://localhost:5001'));
+        this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, endpointOverride));
         this.httpWert = new HTTPAPICaller(wertApiBaseUrl(chainId, endpointOverride));
     }
     DeadGamesHTTPClient.prototype.getNftPreviewsByAddress = function (addresses) {

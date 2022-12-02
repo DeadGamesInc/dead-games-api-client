@@ -23,7 +23,7 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
   constructor(config: DeadGamesClientConfig = DEFAULT_CLIENT_CONFIG) {
     const { chainId, endpointOverride } = config
 
-    this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, 'http://localhost:5001'))
+    this.http = new HTTPAPICaller(nftApiBaseUrl(chainId, endpointOverride))
     this.httpWert = new HTTPAPICaller(wertApiBaseUrl(chainId, endpointOverride))
   }
 
