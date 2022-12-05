@@ -10,11 +10,13 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
     private callPluralApi;
     getNfts: () => Promise<Nft[]>;
     getNft: (address: string) => Promise<NftDTO>;
+    indexNft: (address: string) => Promise<NftPreviewDTO>;
     getTotalWallets: () => Promise<number>;
     getWallet: (walletAddress: string) => Promise<WalletDTO>;
     getNftPreviews: () => Promise<NftPreviewDTO[]>;
     getNftPreviewsByAddress(addresses: string[]): Promise<NftPreviewDTO[]>;
     getOwnedNftPreviews: (owner: string) => Promise<NftPreviewDTO[]>;
+    indexNft1155: (address: string) => Promise<Nft1155DTO>;
     getNfts1155: () => Promise<Nft1155DTO[]>;
     getOwnedNfts1155: (owner: string) => Promise<Nft1155DTO[]>;
     getWalletNftPreviews: (walletAddress: string) => Promise<NftPreviewDTO[]>;

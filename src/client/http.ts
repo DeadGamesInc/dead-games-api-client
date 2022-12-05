@@ -40,6 +40,12 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
       getReturnUndefinedOn404Config()
     )
 
+  indexNft = (address: string): Promise<NftPreviewDTO> =>
+    this.http.get(
+      join('indexNft', address),
+      getReturnUndefinedOn404Config()
+    )
+
   getTotalWallets = (): Promise<number> =>
     this.http.get(
       join('getTotalWallets'),
@@ -62,6 +68,12 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
 
   getOwnedNftPreviews = (owner: string): Promise<NftPreviewDTO[]> =>
     this.callPluralApi(join('getOwnedNftPreviews', owner), toNftPreview)
+
+  indexNft1155 = (address: string): Promise<Nft1155DTO> =>
+    this.http.get(
+      join('indexNft1155', address),
+      getReturnUndefinedOn404Config()
+    )
 
   getNfts1155 = (): Promise<Nft1155DTO[]> =>
     this.callPluralApi(join('getNfts1155'))

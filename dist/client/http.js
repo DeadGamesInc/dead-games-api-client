@@ -88,6 +88,9 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         this.getNft = function (address) {
             return _this.http.get(join('getNft', address), getReturnUndefinedOn404Config());
         };
+        this.indexNft = function (address) {
+            return _this.http.get(join('indexNft', address), getReturnUndefinedOn404Config());
+        };
         this.getTotalWallets = function () {
             return _this.http.get(join('getTotalWallets'), getReturnUndefinedOn404Config());
         };
@@ -99,6 +102,9 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         };
         this.getOwnedNftPreviews = function (owner) {
             return _this.callPluralApi(join('getOwnedNftPreviews', owner), toNftPreview);
+        };
+        this.indexNft1155 = function (address) {
+            return _this.http.get(join('indexNft1155', address), getReturnUndefinedOn404Config());
         };
         this.getNfts1155 = function () {
             return _this.callPluralApi(join('getNfts1155'));
