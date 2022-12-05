@@ -28,7 +28,7 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
   }
 
   private callPluralApi = async <R, T>(api: string, resultMapper?: (raw: R) => T): Promise<T[]> => {
-    const results: R[] = await this.http.get(api)
+    const results: R[] = await this.http.get(api, getReturnUndefinedOn404Config())
     return resultMapper ? results.map(resultMapper) : (results as unknown as T[])
   }
 

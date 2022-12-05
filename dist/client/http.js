@@ -77,7 +77,7 @@ var DeadGamesHTTPClient = /** @class */ (function () {
             var results;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.http.get(api)];
+                    case 0: return [4 /*yield*/, this.http.get(api, getReturnUndefinedOn404Config())];
                     case 1:
                         results = _a.sent();
                         return [2 /*return*/, resultMapper ? results.map(resultMapper) : results];
