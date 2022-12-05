@@ -18,6 +18,8 @@ export interface DeadGamesNftApi {
   getNftPreviews: () => Promise<NftPreviewDTO[]>
   getNftPreviewsByAddress: (addresses: string[]) => Promise<NftPreviewDTO[]>
   getNfts1155: () => Promise<Nft1155DTO[]>
+  indexNft: (address: string) => Promise<NftPreviewDTO>
+  indexNft1155: (address: string) => Promise<Nft1155DTO>
 }
 
 export interface WertPartnerApi {
