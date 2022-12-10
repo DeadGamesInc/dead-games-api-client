@@ -97,8 +97,8 @@ var DeadGamesHTTPClient = /** @class */ (function () {
         this.getWallet = function (walletAddress) {
             return _this.http.get(join('getWallet', walletAddress), getReturnUndefinedOn404Config());
         };
-        this.getWallet1155s = function () {
-            return _this.callPluralApi(join('getWallet1155s'));
+        this.getWallet1155s = function (wallet) {
+            return _this.callPluralApi(join('getWallet1155s', wallet));
         };
         this.getNftPreviews = function () {
             return _this.callPluralApi(join('getNftPreviews'), toNftPreview);

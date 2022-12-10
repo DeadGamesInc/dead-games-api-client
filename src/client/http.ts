@@ -58,8 +58,8 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
       getReturnUndefinedOn404Config(),
     )
 
-  getWallet1155s = (): Promise<Held1155NftTokenDTO[]> =>
-    this.callPluralApi(join('getWallet1155s'))
+  getWallet1155s = (wallet: string): Promise<Held1155NftTokenDTO[]> =>
+    this.callPluralApi(join('getWallet1155s', wallet))
 
   getNftPreviews = (): Promise<NftPreviewDTO[]> =>
     this.callPluralApi(join('getNftPreviews'), toNftPreview)
