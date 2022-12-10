@@ -4,7 +4,7 @@ import DeadGamesApi from '../model/api'
 import { Nft, Nft1155DTO, NftDTO, NftPreviewDTO, RawNftPreviewDTO } from '../model'
 import { HTTPAPICaller, getReturnUndefinedOn404Config } from '../utils/http'
 import { DEFAULT_CLIENT_CONFIG, DeadGamesClientConfig } from './types'
-import { Wallet, WalletDTO } from "../model/wallet";
+import { Held1155NftTokenDTO, Wallet, WalletDTO } from "../model/wallet";
 import { SignableData, SignatureResponse } from "../model/wert";
 
 
@@ -57,6 +57,9 @@ export default class DeadGamesHTTPClient implements DeadGamesApi {
       join('getWallet', walletAddress),
       getReturnUndefinedOn404Config(),
     )
+
+  getWallet1155s = (): Promise<Held1155NftTokenDTO[]> =>
+    this.callPluralApi(join('getWallet1155s'))
 
   getNftPreviews = (): Promise<NftPreviewDTO[]> =>
     this.callPluralApi(join('getNftPreviews'), toNftPreview)

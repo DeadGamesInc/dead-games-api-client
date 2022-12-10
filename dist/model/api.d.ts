@@ -1,5 +1,5 @@
 import { Nft, Nft1155DTO, NftDTO, NftPreviewDTO } from './nft';
-import { Wallet, WalletDTO } from "./wallet";
+import { Held1155NftTokenDTO, Wallet, WalletDTO } from "./wallet";
 import { SignatureResponse, SignableData } from "./wert";
 export interface DeadGamesWalletApi {
     getTotalWallets: () => Promise<number>;
@@ -9,6 +9,7 @@ export interface DeadGamesWalletApi {
     refreshWalletNft: (walletAddress: string, nftAddress: string) => Promise<number[]>;
     getOwnedNftPreviews: (walletAddress: string) => Promise<NftPreviewDTO[]>;
     getOwnedNfts1155: (walletAddress: string) => Promise<Nft1155DTO[]>;
+    getWallet1155s: (walletAddress: string) => Promise<Held1155NftTokenDTO[]>;
 }
 export interface DeadGamesNftApi {
     getNfts: () => Promise<Nft[]>;
